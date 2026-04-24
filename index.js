@@ -72,4 +72,29 @@ class Field {
     return this.field[this.locationY][this.locationX] === hole;
   }
 
+ // เพิ่ม method สำหรับสร้างสนามแบบสุ่ม 
+  static generateField(height, width, percentage = 0.1) {
+    const field = new Array(height).fill(0).map(() => new Array(width).fill(fieldCharacter));
+    
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const prob = Math.random();
+        field[y][x] = prob > percentage ? fieldCharacter : hole;
+      }
+    }
+
+    // วางหมวกแบบสุ่ม 
+    let hatX = Math.floor(Math.random() * width);
+    let hatY = Math.floor(Math.random() * height);
+    while (hatX === 0 && hatY === 0) {
+        hatX = Math.floor(Math.random() * width);
+        hatY = Math.floor(Math.random() * height);
+    }
+    field[hatY][hatX] = hat;
+    
+    return field;
+  }
 }
+
+const myField = new Field(Field.generateField(8, 8, 0.2));
+myField.runGame();
