@@ -22,7 +22,7 @@ class Field {
     let playing = true;
     while (playing) {
       this.print(); 
-      this.askQuestion(); 
+      this.askQuestion();
       
       if (!this.isInBounds()) { 
         console.log("เดินออกนอกเกม คุณแพ้แล้ว");
@@ -64,4 +64,12 @@ class Field {
       this.locationX < this.field[0].length
     );
   }
+ isHat() {
+    return this.field[this.locationY][this.locationX] === hat;
+  }
+
+  isHole() {
+    return this.field[this.locationY][this.locationX] === hole;
+  }
+
 }
